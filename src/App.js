@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { ChildArea } from "./ChildArea";
 import "./styles.css";
 
@@ -14,6 +14,8 @@ export default function App() {
   // !open:反対の意味にする　ということ
   const onClickOpen = () => setOpen(!open);
 
+  const onClickClose = useCallback(() => setOpen(false), [setOpen]);
+
   return (
     <div className="App">
       <input value={text} onChange={onChangeText} />
@@ -21,8 +23,10 @@ export default function App() {
       <br />
       <button onClick={onClickOpen}>show</button>
       {/* コンポーネントを呼び出す
-      上で作った変数openを、openという名前のpropsに入れて渡す*/}
-      <ChildArea open={open} />
+      上で作った変数openを、openという名前のpropsに入れて渡す
+      青文字になっているのがpropsの名前、白いのがそれに入れる中身
+      propsは複数個渡すことができる*/}
+      <ChildArea open={open} close={onClickClose} />
     </div>
   );
 }

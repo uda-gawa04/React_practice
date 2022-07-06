@@ -8,7 +8,7 @@ const style = {
 
 export const ChildArea = memo((props) => {
   // 分割代入
-  const { open } = props;
+  const { open, close } = props;
 
   // 模擬的にレンダリングの不可を高める
   // 2000件のデータが入った配列を作る
@@ -23,6 +23,7 @@ export const ChildArea = memo((props) => {
       {open ? (
         <div style={style}>
           <p>ChildConponent</p>
+          <button onClick={close}>close</button>
         </div>
       ) : null}
     </>
