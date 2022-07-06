@@ -1,20 +1,28 @@
 import { useState } from "react";
+import { ChildArea } from "./ChildArea";
 import "./styles.css";
 
 export default function App() {
-  const [count, setConst] = useState(0);
-  const onClickCountup = () => {
-    setConst(count + 1);
-  };
+  // ステートを定義
+  const [text, setText] = useState("");
+  const [open, setOpen] = useState(false);
+
+  // インプットした値をステートに保持する
+  const onChangeText = (e) => setText(e.target.value);
+
+  // 子供のコンポーネントの表示非表示の切り替え
+  // !open:反対の意味にする　ということ
+  const onClickOpen = () => setOpen(!open);
 
   return (
     <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-      {/* 変数を表示 */}
-      <p>{count}</p>
-      {/* ボタンを押すと、count変数が変わる機能を持った変数を呼び出す */}
-      <button onClick={onClickCountup}>countup</button>
+      <input value={text} onChange={onChangeText} />
+      <br />
+      <br />
+      <button onClick={onClickOpen}>show</button>
+      {/* コンポーネントを呼び出す
+      上で作った変数openを、openという名前のpropsに入れて渡す*/}
+      <ChildArea open={open} />
     </div>
   );
 }
